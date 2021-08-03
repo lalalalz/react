@@ -20,7 +20,7 @@ var config = {
     // Site Config ====================================================
     siteTitle:              'Airframe',
     siteDescription:        'Default Dashboard ready for Development',
-    siteCannonicalUrl:      'http://localhost:4100',
+    siteCannonicalUrl:      'http://gssiot.iptime.org:4100',
     siteKeywords:           'react dashboard seed bootstrap',
     scssIncludes:           [],
 

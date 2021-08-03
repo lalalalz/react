@@ -9,34 +9,40 @@ import { TrTableResponsive } from "./components/TrTableResponsive";
 import { observer } from 'mobx-react';
 import _stores from './stores/EnvStore';
 import { toJS } from 'mobx';
+import DatePicker from 'react-datepicker';
+import { ButtonInput } from '../../routes/Forms/DatePicker/components';
 
 const store = new _stores();
 
 const MyApp = observer(() => {
     
-    const { temp, humi, cabd, temp_sts, humi_sts, cabd_sts } = toJS(store);
+    const { temp, ec, humi, cabd, ec_sts, temp_sts, humi_sts, cabd_sts, selected_date } = toJS(store);
     const { setting, setting2 } = store;
 
-    const set = () => {
-        setting();
-        setting2();
+    const handleDateChange = (selected_date) => {
+        setting(selected_date);
+        setting2(selected_date);
     }
+
+    console.log("temp_sts", temp_sts);
 
     return (
         <Container>
-            <button onClick={set}>눌러보세요</button>
-            <HeaderMain
-                title="Daily Report"
-                className="mb-4 mt-4"
-            />
-            <p>
-                Welcome to the Smart Farm Daily Report page.
-            </p> 
             <Row>
                 <Col lg={12}>
+                    <p></p>
+                </Col>
+                <Col lg={9}>
+                    <HeaderMain
+                        title="Daily Report"
+                        className="mb-4 mt-4"
+                    />
+                    <p>
+                        Welcome to the Smart Farm Daily Report page.
+                    </p>
                     <HeaderDemo
                         no={1}
-                        title="Real-Time Status"
+                        title="System Status"
                         subTitle={(
                             <React.Fragment>
                                 This sector indicates the current system status of the smart farm.
@@ -44,6 +50,15 @@ const MyApp = observer(() => {
                         )}
                     />
                 </Col>
+                <Col>
+                    <DatePicker 
+                        inline
+                        selected={selected_date}
+                        onChange={handleDateChange}
+                    />
+                </Col>
+            </Row>
+            <Row>
                 <Col lg={12}>
                     <Card className="mb-3">
                         <CardBody>
@@ -154,7 +169,7 @@ const MyApp = observer(() => {
                                 <p></p>
                             </div>
                         </div>
-                        <SimpleLineChart></SimpleLineChart>
+                        <SimpleLineChart data={null}></SimpleLineChart>
                     </CardBody>
                 </Card>
             </CardDeck>
@@ -228,7 +243,7 @@ const MyApp = observer(() => {
                         <div className="d-flex">
                             <div>
                                 <h6 className="card-title mb-1">
-                                    none
+                                    NONE
                                     <span className="small ml-1 text-muted">
                                         #2.04
                                     </span>
@@ -236,7 +251,7 @@ const MyApp = observer(() => {
                                 <p></p>
                             </div>
                         </div>
-                        <SimpleBarChart></SimpleBarChart>
+                        <SimpleBarChart data={null}></SimpleBarChart>
                     </CardBody>
                 </Card>
             </CardDeck>

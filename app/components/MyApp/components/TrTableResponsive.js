@@ -36,7 +36,7 @@ const colorStatus = [
 const TrTableResponsive = () => (
     <React.Fragment>
         {
-            _.times(10, (index) => (
+            _.times(5, (index) => (
                 <tr key={ index }>
                     {/* color & status */}
                     <td className="align-middle">
